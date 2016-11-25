@@ -5,7 +5,6 @@ This gem implements a partial api to the InternetX AutoDNS XML http interface.
 
     gem install autodns_api
 
-
 ## Usage Examples
 
 ```ruby
@@ -32,3 +31,7 @@ if response.success?
   puts response.all_attributes
 end
 ```
+
+# Further Documentation
+
+Official AutoDNS documentation: https://login.autodns.com/files/downloads/1/adns_schnittstellendokumentation16.0.pdf
