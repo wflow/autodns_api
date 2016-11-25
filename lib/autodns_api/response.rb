@@ -14,6 +14,7 @@ module AutodnsAPI
           memo
         end
       end
+      .reject(&:empty?)
     end
 
     # @return [Boolean]
