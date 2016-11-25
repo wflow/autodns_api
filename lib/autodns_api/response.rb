@@ -26,5 +26,12 @@ module AutodnsAPI
     def status_message
       @data.xpath('//status/text').text
     end
+
+    def status_object
+      type  = @data.xpath('//status/object/type').text
+      value = @data.xpath('//status/object/value').text
+
+      {'type' => type, 'value' => value}
+    end
   end
 end
