@@ -8,6 +8,8 @@ This gem implements a partial api to the InternetX AutoDNS XML http interface.
 ## Usage Examples
 
 ```ruby
+require 'autodns_api'
+
 client = AutodnsAPI::Client.new(
   url: 'https://gateway.autodns.com/', user: 'user', password: 'password', context: '1'
 )
