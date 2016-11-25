@@ -47,8 +47,11 @@ module AutodnsAPI
       Response.new(response)
     end
 
-    # Attention! This method takes all supplied params and sends them unchanged to the underlying xml object!
+    
+    SUPPORTED_HANDLE_PARAMS = %i{type fname lname title organization address pcode city state country phone fax email sip protection force_handle_create comment}
+    # Attention! This method takes all supplied params included in `Contact::SUPPORTED_HANDLE_PARAMS` and sends them unchanged to the underlying xml object!
     # You have to validate the supplied attributes on your domain layer.
+    #
     # Usage:
     #    AutodnsAPI::Contact.create_handle(transport, type: 'PERSON', city: 'Trostberg', pcode: '83308', address: 'Gabelsbergerstr. 6', lname: 'Admin')
     #
@@ -59,7 +62,9 @@ module AutodnsAPI
         xml.code '0301'
         xml.handle do
           params.each do |k, v|
-            xml.send(k.to_sym, v.to_s)
+            k = k.to_sym
+            next unless SUPPORTED_HANDLE_PARAMS.include?(k)
+            xml.send(k, v.to_s)
           end
         end
       end
