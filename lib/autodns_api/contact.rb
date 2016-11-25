@@ -29,7 +29,7 @@ module AutodnsAPI
       
       Response.new(response)
     end
-    
+
     # @param [AutodnsAPI::Transport] transport
     # @param [String] key of the attribute to query
     # @param [String] value of the attribute to query, can contain wildcards like *
@@ -41,6 +41,26 @@ module AutodnsAPI
           xml.key key.to_s
           xml.operator :like
           xml.value value.to_s
+        end
+      end
+      
+      Response.new(response)
+    end
+
+    # Attention! This method takes all supplied params and sends them unchanged to the underlying xml object!
+    # You have to validate the supplied attributes on your domain layer.
+    # Usage:
+    #    AutodnsAPI::Contact.create_handle(transport, type: 'PERSON', city: 'Trostberg', pcode: '83308', address: 'Gabelsbergerstr. 6', lname: 'Admin')
+    #
+    # @param [AutodnsAPI::Transport] transport
+    # @param [Hash<Symbol,String>] params
+    def self.create_handle(transport, params={})
+      response = transport.request do |xml|
+        xml.code '0301'
+        xml.handle do
+          params.each do |k, v|
+            xml.send(k.to_sym, v.to_s)
+          end
         end
       end
       
