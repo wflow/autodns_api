@@ -29,7 +29,7 @@ module AutodnsAPI
           xml.auth {
             xml.user config[:user]
             xml.password config[:password]
-            xml.context 
+            xml.context_ config[:context]
           }
           xml.task {
             yield xml
